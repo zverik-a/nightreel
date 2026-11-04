@@ -37,8 +37,12 @@ def pick(
     preview: str | None = None,
     expect: Sequence[str] = (),
     extra: Sequence[str] = (),
+    cursor: str | None = None,
 ) -> Selection | None:
-    """Show ``(id, text)`` rows in fzf. Returns ``None`` when the user cancels (Esc / Ctrl-C)."""
+    """Show ``(id, text)`` rows in fzf. Returns ``None`` when the user cancels (Esc / Ctrl-C).
+
+    ``cursor`` is the id of the row to start on (e.g. to stay in place after an action).
+    """
     keys = [k for k in (cfg.panic_key, *expect) if k]
     cmd = [
         "fzf",
@@ -60,6 +64,10 @@ def pick(
         cmd += [f"--preview={preview}", "--preview-window=right,45%,wrap,border-left"]
     if keys:
         cmd.append(f"--expect={','.join(dict.fromkeys(keys))}")
+    if cursor is not None:
+        index = next((i for i, (rid, _) in enumerate(rows) if rid == cursor), None)
+        if index:
+            cmd.append(f"--bind=load:pos({index + 1})")
     cmd += list(extra)
 
     payload = "\n".join(f"{rid}{SEP}{text}" for rid, text in rows)

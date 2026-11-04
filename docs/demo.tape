@@ -1,5 +1,8 @@
 # Records docs/demo.gif with the offline demo provider (no real site content).
 # Run from the repo root:  vhs docs/demo.tape
+#
+# vhs is slow: keys typed while the app is switching screens get lost, so every screen
+# change is followed by a generous Sleep.
 Output docs/demo.gif
 
 Set Shell "bash"
@@ -8,7 +11,7 @@ Set Width 1280
 Set Height 720
 Set Padding 16
 Set Theme "Catppuccin Mocha"
-Set TypingSpeed 70ms
+Set TypingSpeed 80ms
 
 Hide
 Type "export PATH=$PWD/.venv/bin:$PATH NIGHTREEL_PROVIDER=demo NIGHTREEL_AGE_CONFIRMED=1 NIGHTREEL_THUMBNAILS=0"
@@ -17,67 +20,66 @@ Type "export XDG_CONFIG_HOME=$(mktemp -d) XDG_DATA_HOME=$(mktemp -d) XDG_STATE_H
 Enter
 Type "clear"
 Enter
+Sleep 500ms
 Show
 
 Type "nightreel"
 Sleep 400ms
 Enter
-Sleep 1.5s
+Sleep 2.5s
 
-# search
+# --- search -------------------------------------------------------------------
 Type "sea"
-Sleep 600ms
+Sleep 700ms
 Enter
-Sleep 600ms
+Sleep 2.5s
 Type "night"
-Sleep 400ms
+Sleep 500ms
 Enter
-Sleep 2s
+Sleep 3s
 Down
-Sleep 500ms
+Sleep 700ms
 Down
-Sleep 500ms
+Sleep 700ms
 Down
-Sleep 1.2s
+Sleep 1.5s
 
-# favorite the highlighted video, multi-select two more
+# favorite the highlighted video (cursor stays put)
 Ctrl+F
-Sleep 1.2s
-Tab
-Sleep 400ms
-Tab
-Sleep 800ms
+Sleep 2.5s
 
-# actions menu
+# multi-select two, open the actions menu
+Tab
+Sleep 600ms
+Tab
+Sleep 1s
 Enter
-Sleep 2s
+Sleep 3s
 Escape
-Sleep 800ms
+Sleep 2.5s
 Escape
-Sleep 800ms
+Sleep 2.5s
 
-# categories
-Type "categ"
-Sleep 500ms
+# --- top rated ----------------------------------------------------------------
+Type "top"
+Sleep 700ms
 Enter
-Sleep 1.2s
+Sleep 3s
 Down
-Sleep 400ms
-Enter
-Sleep 2s
+Sleep 600ms
+Down
+Sleep 1.5s
 Ctrl+N
-Sleep 1.5s
+Sleep 3s
 Escape
-Sleep 500ms
-Escape
-Sleep 800ms
+Sleep 2.5s
 
-# favorites
+# --- favorites ----------------------------------------------------------------
 Type "favo"
-Sleep 500ms
+Sleep 700ms
 Enter
-Sleep 2s
+Sleep 3s
 
-# panic key: instant exit, screen wiped
+# --- panic key: instant exit, screen and scrollback wiped -----------------------
 Ctrl+X
-Sleep 1.5s
+Sleep 2s

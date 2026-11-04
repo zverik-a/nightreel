@@ -133,6 +133,7 @@ class App:
 
     def _browse(self, title: str, fetch: Fetch, *, local: bool = False) -> None:
         number = 1
+        cursor: str | None = None  # keep the cursor on the last used video
         cache: dict[int, Page] = {}  # remote pages don't change while browsing
         while True:
             try:
@@ -167,6 +168,7 @@ class App:
                 multi=True,
                 preview=self._preview_cmd(),
                 expect=[KEY_NEXT, KEY_PREV, KEY_FAV, KEY_DL, KEY_OPEN, KEY_COPY],
+                cursor=cursor,
             )
             if sel is None:
                 return
@@ -174,10 +176,13 @@ class App:
 
             if sel.key == KEY_NEXT or (not sel.key and sel.first == NEXT):
                 number += 1 if page.has_next else 0
+                cursor = None
                 continue
             if sel.key == KEY_PREV or (not sel.key and sel.first == PREV):
                 number = max(1, number - 1)
+                cursor = None
                 continue
+            cursor = sel.first
 
             chosen = [videos[i] for i in sel.ids if i in videos]
             if not chosen:

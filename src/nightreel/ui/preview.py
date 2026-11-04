@@ -22,7 +22,7 @@ def render_text(v: Video) -> str:
     lines = [
         f"{BOLD}{v.title}{RESET}",
         "",
-        f"{ACCENT}⏱{RESET} {v.duration_str}   {ACCENT}👁{RESET} {format_count(v.views)}   "
+        f"{ACCENT}{v.duration_str}{RESET} · {format_count(v.views)} views · "
         f"{ACCENT}★{RESET} {v.rating:g}%",
     ]
     if v.published:
