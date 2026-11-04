@@ -8,6 +8,7 @@ from importlib.metadata import entry_points
 from ..__about__ import APP_NAME
 from ..config import Config
 from .base import NotFoundError, Provider, ProviderError
+from .demo import DemoProvider
 from .webmasters import WebmastersProvider
 
 __all__ = ["NotFoundError", "Provider", "ProviderError", "available", "create"]
@@ -16,6 +17,7 @@ __all__ = ["NotFoundError", "Provider", "ProviderError", "available", "create"]
 def _builtin() -> dict[str, Callable[[Config], Provider]]:
     return {
         "webmasters": lambda cfg: WebmastersProvider(timeout=cfg.timeout, proxy=cfg.proxy or None),
+        "demo": lambda cfg: DemoProvider(),
     }
 
 

@@ -11,6 +11,9 @@ Search, preview, stream and download — powered by <b>fzf</b>, <b>mpv</b> and <
 <img src="https://img.shields.io/badge/license-MIT-green">
 </p>
 
+<p align="center"><img src="docs/demo.gif" alt="demo" width="900"></p>
+<p align="center"><sub>Recorded with the built-in offline <code>demo</code> provider.</sub></p>
+
 > **18+ only.** This tool gives access to adult content. Use it only if you are an adult and
 > it is legal where you live, and respect the terms of the sites you use.
 
@@ -117,6 +120,9 @@ Implement the `Provider` protocol in `src/nightreel/providers/base.py` and regis
 uv venv && uv pip install -e '.[dev]'
 pytest && ruff check . && mypy src
 ```
+
+Try the UI offline with neutral sample data: `NIGHTREEL_PROVIDER=demo nightreel`.
+Re-record the demo GIF: `vhs docs/demo.tape`.
 
 Renaming the project: `python scripts/rename.py newname` (add `--dry-run` to preview).
 
