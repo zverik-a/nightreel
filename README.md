@@ -44,6 +44,9 @@ pipx install git+https://github.com/zverik-a/nightreel
 nightreel doctor
 ```
 
+Arch Linux: a `PKGBUILD` is in [`packaging/aur`](packaging/aur) (`makepkg -si`).
+A wheel for each version is attached to the [GitHub releases](https://github.com/zverik-a/nightreel/releases).
+
 From a clone: `pipx install .` (or `pip install -e '.[dev]'` for development).
 
 ## Usage

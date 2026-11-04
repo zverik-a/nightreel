@@ -1,0 +1,46 @@
+# Maintainer: zverik-a <https://github.com/zverik-a>
+pkgname=nightreel
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Terminal browser and player for adult video sites (fzf + mpv + yt-dlp)"
+arch=('any')
+url="https://github.com/zverik-a/nightreel"
+license=('MIT')
+depends=(
+  'python>=3.11'
+  'python-typer'
+  'python-rich'
+  'python-httpx'
+  'python-platformdirs'
+  'python-tomli-w'
+  'yt-dlp'
+  'mpv'
+  'fzf'
+)
+optdepends=(
+  'ffmpeg: merge separate video and audio streams'
+  'chafa: thumbnails in the preview pane'
+  'wl-clipboard: copy links on Wayland'
+  'xclip: copy links on X11'
+)
+makedepends=('python-build' 'python-installer' 'python-hatchling')
+checkdepends=('python-pytest' 'python-respx')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')  # run `updpkgsums` after the tag is published
+
+build() {
+  cd "$pkgname-$pkgver"
+  python -m build --wheel --no-isolation
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+  PYTHONPATH=src python -m pytest -q
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
