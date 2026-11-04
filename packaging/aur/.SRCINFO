@@ -1,0 +1,29 @@
+pkgbase = nightreel
+	pkgdesc = Terminal browser and player for adult video sites (fzf + mpv + yt-dlp)
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/zverik-a/nightreel
+	arch = any
+	license = MIT
+	checkdepends = python-pytest
+	checkdepends = python-respx
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-hatchling
+	depends = python>=3.11
+	depends = python-typer
+	depends = python-rich
+	depends = python-httpx
+	depends = python-platformdirs
+	depends = python-tomli-w
+	depends = yt-dlp
+	depends = mpv
+	depends = fzf
+	optdepends = ffmpeg: merge separate video and audio streams
+	optdepends = chafa: thumbnails in the preview pane
+	optdepends = wl-clipboard: copy links on Wayland
+	optdepends = xclip: copy links on X11
+	source = nightreel-0.1.0.tar.gz::https://github.com/zverik-a/nightreel/archive/refs/tags/v0.1.0.tar.gz
+	sha256sums = e9a688b38b087e7968e72e3230e66e9ef0c04f65a2830f92e2e55b75e2fb108a
+
+pkgname = nightreel

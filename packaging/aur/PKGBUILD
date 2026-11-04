@@ -26,7 +26,7 @@ optdepends=(
 makedepends=('python-build' 'python-installer' 'python-hatchling')
 checkdepends=('python-pytest' 'python-respx')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')  # run `updpkgsums` after the tag is published
+sha256sums=('e9a688b38b087e7968e72e3230e66e9ef0c04f65a2830f92e2e55b75e2fb108a')
 
 build() {
   cd "$pkgname-$pkgver"
@@ -35,7 +35,7 @@ build() {
 
 check() {
   cd "$pkgname-$pkgver"
-  PYTHONPATH=src python -m pytest -q
+  PYTHONNOUSERSITE=1 PYTHONPATH=src python -m pytest -q
 }
 
 package() {
